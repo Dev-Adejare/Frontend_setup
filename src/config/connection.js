@@ -22,9 +22,9 @@ createAppKit({
   networks,
   metadata,
   projectId,
-  themeVariables: {
-    ""
-  }
+//   themeVariables: {
+//     ""
+//   }
   features: {
     analytics: true // Optional - defaults to your Cloud configuration
   }
