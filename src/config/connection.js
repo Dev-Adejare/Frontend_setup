@@ -22,9 +22,12 @@ createAppKit({
   networks,
   metadata,
   projectId,
-//   themeVariables: {
-//     ""
-//   }
+  themeVariables: {
+    "--w3m-accent": "#1c1917",
+    "--w3m-border-radius-master": "1px",
+  },
+  themeMode: "dark",
+  termsConditionsUrl:'https://www.mytermsandconditions.com',
   features: {
     analytics: true // Optional - defaults to your Cloud configuration
   }

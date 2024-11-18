@@ -5,7 +5,7 @@ function App() {
 
   return (
     <Layout>
-      <h1>Todo Dapp</h1>
+      <h1 className="text-3xl font-bold underline">Todo Dapp</h1>
     </Layout>
   )
 }
