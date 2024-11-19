@@ -1,27 +1,27 @@
-import { useAppKitProvider } from "@reown/appkit/react"
+import { useAppKitProvider } from "@reown/appkit/react";
 import { BrowserProvider } from "ethers";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-const usesignerOrProvider = () => {
+const useSignerOrProvider = () => {
+  const [signer, setSigner] = useState();
 
-    const [ signer, setSigner] = useState();
-     
-    const { walletProvider } = useAppKitProvider("eip155");
+  const { walletProvider } = useAppKitProvider();
 
-    const provider = useMemo( 
-        
-        () => ( walletProvider ? new BrowserProvider(walletProvider) : null),
-        [walletProvider]
-    );
+  const provider = useMemo(
+    () => (walletProvider ? new BrowserProvider(walletProvider) : null),
+    [walletProvider]
+  );
 
-    useEffect(() => {
-        if(!provider) return setSigner(null);
+  useEffect(() => {
+    if (!provider) return setSigner(null);
 
-        provider.getSigner().then((newSigner) => {
-            if(!signer) return setSigner(newSigner);
-            if(newSigner.address !== signer.address) return setSigner(newSigner);
-        })
-    })
-}
+    provider.getSigner().then((newSigner) => {
+      if (!signer) return setSigner(newSigner);
+      if (newSigner.address === signer.address) return setSigner(newSigner);
+    });
+  }, [provider, signer]);
 
-export default usesignerOrProvider
+  return { signer, provider };
+};
+
+export default useSignerOrProvider;
