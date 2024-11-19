@@ -1,13 +1,15 @@
-import "./config/connection"
-import Layout from './components/Layout'
-function App() {
-  
+import "./config/connection";
+import Layout from "./components/Layout";
+import CreateTodoModal from "./components/CreateTodoModal";
+import Todos from "./components/Todos";
 
+function App() {
   return (
     <Layout>
-      <h1 className="text-3xl font-bold underline">Todo Dapp</h1>
+      <CreateTodoModal />
+      <Todos />
     </Layout>
-  )
+  );
 }
 
-export default App
+export default App;

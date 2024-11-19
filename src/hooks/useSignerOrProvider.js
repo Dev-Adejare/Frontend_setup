@@ -1,11 +1,12 @@
 import { useAppKitProvider } from "@reown/appkit/react";
 import { BrowserProvider } from "ethers";
 import { useEffect, useMemo, useState } from "react";
+import { readOnlyProvider } from "../constants/readOnlyProvider";
 
 const useSignerOrProvider = () => {
   const [signer, setSigner] = useState();
 
-  const { walletProvider } = useAppKitProvider();
+  const { walletProvider } = useAppKitProvider("eip155");
 
   const provider = useMemo(
     () => (walletProvider ? new BrowserProvider(walletProvider) : null),
@@ -21,7 +22,7 @@ const useSignerOrProvider = () => {
     });
   }, [provider, signer]);
 
-  return { signer, provider };
+  return { signer, provider, readOnlyProvider };
 };
 
 export default useSignerOrProvider;
