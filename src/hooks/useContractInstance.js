@@ -16,7 +16,7 @@ const useContractInstance = (withSigner = false) => {
       );
     }
 
-    return Contract(
+    return new Contract(
       import.meta.env.VITE_TODO_CONTRACT_ADDRESS,
       ABI,
       readOnlyProvider
