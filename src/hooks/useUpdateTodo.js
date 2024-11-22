@@ -1,7 +1,6 @@
 import { useCallback } from "react";
 import useContractInstance from "./useContractInstance";
 import { useAppKitAccount, useAppKitNetwork } from "@reown/appkit/react";
-import { toast } from "react-toastify";
 import { baseSepolia } from "@reown/appkit/networks";
 
 const useUpdateTodo = () => {
@@ -12,7 +11,7 @@ const useUpdateTodo = () => {
   return useCallback(
     async (index, title, description) => {
       if (!title || !description) {
-        toast.error("All fields are required");
+        toast.error("Title and description are required");
         return;
       }
 
@@ -48,14 +47,17 @@ const useUpdateTodo = () => {
           toast.success("Todo updated successfully");
           return;
         }
+
         toast.error("Failed to update todo");
         return;
       } catch (error) {
-        console.error("Error updating todo:", error);
-        toast.error("Failed to update todo");
+        const errorDecoder = ErrorDecoder.create();
+        const decodedError = await errorDecoder.decode(error);
+        console.error("Error from updating todo", decodedError);
+        toast.error(decodedError.reason);
       }
     },
-    [address, chainId, contract]
+    [contract, address, chainId]
   );
 };
 
